@@ -9,6 +9,7 @@ use App\Follower;
 use App\Comment;
 use App\Achievement;
 use App\Like;
+use App\Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -127,6 +128,18 @@ class PostController extends Controller
            ->decrement('total_point',$request->point);
        Achievement::find($request->achievement_id)->delete();
        }
+       return redirect('index.php');
+     }
+
+     public function report(Request $request){
+       $report = new Report();
+
+       $report->post_id = $request->post_id;
+       //登録ユーザーからidを取得
+       $report->reporter_id = Auth::user()->id;
+
+       $report->save();
+
        return redirect('index.php');
      }
 

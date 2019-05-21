@@ -92,6 +92,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 //投稿機能
 Route::post('/post', 'PostController@create');
+//報告機能
+Route::post('/report', 'PostController@report')->middleware('auth');
 //コメント機能
 Route::post('/comment/{comment_id}', 'CommentController@store');
 //クエスト受注機能

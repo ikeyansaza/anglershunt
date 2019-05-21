@@ -105,7 +105,14 @@
                           </li>
                           </form>
                           @else
-                          <li><a href="">報告</a></li>
+                          <form class="" action="/report" method="post">
+                          @csrf
+                          <li>
+                          <input type="hidden" name="post_id" value="{{$post->id}}">
+                          <input type="hidden" name="reporter_id" value="{{$user->id}}">
+                          <input type="submit" value="報告" class="btn-danger" onclick='return confirm("投稿を報告しますか？");'>
+                          </li>
+                          </form>
                           @endif
                         </ul>
                     </li>

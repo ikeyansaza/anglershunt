@@ -56,6 +56,10 @@
          <a href="#"><h1>AnglersHunt</h1></a>
         </div>
         <div class="item">
+        @if($user->id == '25')
+        <span><a href="/login">ログイン</a></span>
+        <span><a href="/register">登録</a></span>
+        @else
         <a href="{{ $user->name_address }}/album">
           @if($user->icon_img == null)
           <img class="prof-img "src="/images/noimage.jpg">
@@ -63,6 +67,7 @@
           <img class="prof-img" src="/public/images/{{ $user->id }}icon.jpg">
           @endif
         </a>
+        @endif
         </div>
       </div>
     </header>
