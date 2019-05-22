@@ -77,7 +77,7 @@
             <div class="rank-rank">
               {{ $ranker->getRanking() }}位
             </div>
-            <a href="../{{ $ranker->name }}/album">
+            <a href="../{{ $ranker->name_address }}/album">
             <div class="item rank-main-img">
               @if($ranker->icon_img == null)
               <img class="prof-img4" src="/images/noimage.jpg">
@@ -93,7 +93,7 @@
               @else
               <span>{{ $ranker->total_point }}pt</span><br>
               @endif
-              <a href="../{{ $ranker->name }}/quests"><span class="rank">達成クエスト一覧</span></a><br>
+              <a href="../{{ $ranker->name_address }}/quests"><span class="rank">達成クエスト一覧</span></a><br>
             </div>
           </div>
         </div>
