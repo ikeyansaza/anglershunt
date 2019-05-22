@@ -1363,6 +1363,10 @@ img {
   border-radius: 20px;
 }
 
+select {
+  padding: 2px 5px;
+}
+
 @media (max-width:959px){
   .others {
     width: 100%;
@@ -1766,9 +1770,10 @@ line-height:1.6;
 }
 
 .mypage-edit {
-    margin-left: 10px;
+    margin-left: 15px;
+    margin-top: 5px;
     font-size: 12px;
-
+    border: 1px solid #999999;
     padding: 5px 10px;
     border-radius: 20px;
 }

@@ -46,7 +46,7 @@
               @else
               <span>{{ $point->monthly_point }}pt</span><br>
               @endif
-              <a href="../{{ $point->user->name }}/quests"><span class="rank">達成クエスト一覧</span></a><br>
+              <a href="../{{ $point->user->name_address }}/quests"><span class="rank">達成クエスト一覧</span></a><br>
             </div>
           </div>
         </div>
