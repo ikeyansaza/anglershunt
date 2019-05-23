@@ -32,13 +32,13 @@
               <a href="/follow">
                 フォロー
               </div><span class="prof-follow-sub">
-                <?php echo $follow_counts; ?>
+                {{ $follow_counts }}
               </span>
               </a>
               <div class="item prof-follow-main">
               <a href="/follower">　フォロワー
               </div><span class="prof-follow-sub">
-                <?php echo $follower_counts; ?>
+                {{ $follower_counts }}
               </span>
               </a>
             </div>
@@ -65,6 +65,19 @@
 
         <!-- 右カラム -->
         <div class="right-content">
+          @if($follow_counts == '0')
+          <div style="padding:5px 10px; color: #11cd2b;">
+            <div style="font-size: 20px;">
+              ユーザーをフォローしてみよう！
+            </div>
+            <span style="border-bottom: 1px solid #11cd2b">
+              <a href="searchUser">エリア検索</a>
+            </span><br>
+            <span style="border-bottom: 1px solid #11cd2b">
+              <a href="rank/main">ランキングから</a>
+            </span>
+          </div>
+          @else
           @foreach($posts as $post)
           <div class="post" data-postid="{{ $post->id }}">
             <div class="post-first contents">
@@ -84,7 +97,7 @@
                     {{ $post->user->name }}
                   </div>
                   <div class="item post-time">
-                    　-<?php echo ($post->updated_at)->diffForHumans($now); ?>
+                    　-{{ ($post->updated_at)->diffForHumans($now) }}
                   </div>
                 </div>
                 <div class="item report" id="main">
@@ -194,6 +207,7 @@
             </div>
           </div>
           @endforeach
+          @endif
         </div>
         <div class="d-flex justify-content-center">
           {{ $posts->links() }}

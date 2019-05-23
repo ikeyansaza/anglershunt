@@ -1372,6 +1372,17 @@ select {
   font-size: 20px;
 }
 
+.follow-edit {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    margin-left: 0px;
+    font-size: 12px;
+    border: 1px solid #999999;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
 @media (max-width:959px){
   .others {
     width: 100%;
@@ -1777,16 +1788,6 @@ line-height:1.6;
 .mypage-edit {
     margin-left: 15px;
     margin-top: 5px;
-    font-size: 12px;
-    border: 1px solid #999999;
-    padding: 5px 10px;
-    border-radius: 20px;
-}
-.follow-edit {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-    margin-left: 0px;
     font-size: 12px;
     border: 1px solid #999999;
     padding: 5px 10px;
