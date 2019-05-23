@@ -22,7 +22,7 @@ class EditController extends Controller
 
    $validate_rule = [
      'name' => ['required',Rule::unique('users')->ignore($id)],
-     'name_address' => ['required','string','alpha_num',Rule::unique('users')->ignore($id)],
+     'name_address' => ['required','regex:/^[a-zA-Z0-9-]+$/',Rule::unique('users')->ignore($id)],
      'email' => ['required','string','email','max:255',Rule::unique('users')->ignore($id)],
      'comment' => ['required','max:255']
    ];
