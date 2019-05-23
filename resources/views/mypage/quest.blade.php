@@ -25,6 +25,7 @@
                   <span class="sankaku">▼</span>
                     <ul class="sub">
                       <li><a href="../logout">ログアウト</a></li>
+                      <li><a href="../help">ヘルプ</a></li>
                     </ul>
                 </li>
               </ul>
