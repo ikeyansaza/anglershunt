@@ -209,7 +209,11 @@ class QuestController extends Controller
   public function tassei(Request $request){
 
     $validate_rule = [
-      'post' => 'required'
+      'post' => 'required',
+      'pic1' => 'file|image|max:8000',
+      'pic2' => 'file|image|max:8000',
+      'pic3' => 'file|image|max:8000',
+      'pic4' => 'file|image|max:8000'
     ];
 
     $this->validate($request, $validate_rule);

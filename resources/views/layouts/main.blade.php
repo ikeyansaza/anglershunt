@@ -57,8 +57,7 @@
         </div>
         <div class="item">
         @if($user->id == '25')
-        <span><a href="/login">ログイン</a></span>
-        <span><a href="/register">登録</a></span>
+        <span style="border: solid 1px #e6ecef; border-radius: 20px; font-size: 14px; padding: 5px 10px;line-height:45px;margin-right: 10px;"><a href="/register">登録</a></span>
         @else
         <a href="{{ $user->name_address }}/album">
           @if($user->icon_img == null)

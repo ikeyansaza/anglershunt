@@ -111,8 +111,8 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'ファイルを正しくアップロードできません。※ファイルサイズは2MBまでです。',
+    'unique' => '※この:attributeは既に使われております。',
+    'uploaded' => 'ファイルを正しくアップロードできません。※ファイルサイズは8MBまでです。',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
 

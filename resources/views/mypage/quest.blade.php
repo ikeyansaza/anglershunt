@@ -49,7 +49,7 @@
           @endif
           @endif
         </div>
-        <span class="mypage-comment">宜しくおねがします。</span><br>
+        <span class="mypage-comment">{{ $currentUserInfo->comment }}</span><br>
         <span class="mypage-follow"><a href="follow">フォロー<span class="color">{{ $follows }}</span></a> <a href="follower">フォロワー<span class="color">{{ $followers }}</span></a></span><br>
         <span class="mypage-point">クエスト獲得経験値 {{ $currentUserInfo->total_point }}pt</span>
     </div>

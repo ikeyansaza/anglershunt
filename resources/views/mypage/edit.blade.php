@@ -35,13 +35,31 @@
           <input type="file" name="icon_img" value=""><br><br>
         </div>
         ユーザー名 <br><br>
+        @if ($errors->has('name'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
+            <br>
+        @endif
         <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required>
         <br><br>
         @ユーザー名 <br><br>
-        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name_address" value="{{ $user->name_address }}" required>
+        @if ($errors->has('name_address'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('name_address') }}</strong>
+            </span>
+            <br>
+        @endif
+        <input id="name" type="text" class="form-control{{ $errors->has('name_address') ? ' is-invalid' : '' }}" name="name_address" value="{{ $user->name_address }}" required>
         <br><br>
         メールアドレス <br><br>
-        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email }}" required>
+        @if ($errors->has('email'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+            <br>
+        @endif
+        <input id="name" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email }}" required>
         <br><br>
         居住エリア <br><br>
         <select name="area" style="cursor:pointer;">
