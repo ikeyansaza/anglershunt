@@ -50,7 +50,7 @@
         <a class="white" href="../index.php"><i class="fas fa-home"></i></a>
       </div>
       <div class="item">
-      <a class="white" href="../quest/achievement"><i class="fas fa-khanda"></i></a>
+      <a class="white" href="../quest/quest"><i class="fas fa-khanda"></i></a>
       </div>
       <div class="item">
       <a class="white" href="../post"><i class="fas fa-plus-circle"></i></a>

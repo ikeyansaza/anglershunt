@@ -10,9 +10,6 @@
   <a href="description">AnglersHuntとは？</a>
 </div>
 <div class="help-item">
-  <a href="question">よくあるご質問</a>
-</div>
-<div class="help-item">
   <a href="policy">利用規約</a>
 </div>
 <div class="help-item">
