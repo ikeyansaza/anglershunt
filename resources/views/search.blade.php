@@ -136,5 +136,8 @@
     </div>
     @endforeach
   </div>
+  <div class="d-flex justify-content-center">
+    {{ $data->links() }}<br><br>
+  </div>
 
 @endsection

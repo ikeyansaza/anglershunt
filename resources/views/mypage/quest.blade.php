@@ -156,7 +156,21 @@
           <a href="/comment/{{ $post->id }}"><i class="far fa-comment-dots"></i></a>
           </div>
           <div class="item">
-
+            @if(auth()->user())
+            @if($post->likes()->where('user_id', Auth::user()->id)->count())
+            <input type="hidden" name="post" value="{{$post->id}}">
+            <input type="hidden" name="user" value="{{$user->id}}">
+            <button type="submit" name="like" id="unlike" data-postid="{{ $post->id }}" data-num="{{ $post->likes()->count() }}">
+            <i class="fas fa-heart"></i>
+            </button>
+            @else
+            <input type="hidden" name="post" value="{{ $post->id }}">
+            <input type="hidden" name="user" value="{{ $user->id }}">
+            <button type="submit" name="like" id="like" data-postid="{{ $post->id }}" data-num="{{ $post->likes()->count() }}">
+            <i class="far fa-heart"></i>
+            </button>
+            @endif
+            @endif
           </div>
         </div>
         <div class="post-fifth fifth-content">
@@ -170,7 +184,7 @@
           </div>
           @endif
           <div class="item">
-            {{ $post->likes()->count() }}人が「いいね！」しました
+            <span class="num{{$post->id}}">{{ $post->likes()->count() }}</span>人が「いいね！」しました
           </div>
         </div>
       </div>

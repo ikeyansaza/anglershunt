@@ -21,6 +21,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
     <title>AnglersHunt</title>
+    {{--js用token生成--}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="../css/style.css">
     {{--FontAwesomeを登録--}}
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
@@ -69,9 +71,13 @@
   </div>
 
 </footer>
+{{--Ajaxのライブラリを読み込み--}}
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 {{--Swiperのライブラリを読み込み--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+{{--Toastrのライブラリを読み込み--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 {{--1.フッターの高さを固定--}}
 <script>
 $(function(){
@@ -82,7 +88,7 @@ $(function(){
     }
   }});
 </script>
-{{--2.フッターナビにマーク--}}
+{{--2.ページナビカラー追加--}}
 <script>
 $(function(){
   $('footer .item a').each(function(){
@@ -95,46 +101,335 @@ $(function(){
   });
 });
 </script>
-{{--3.ドロワーメニューを装備--}}
+{{--3.画像投稿プレビュー--}}
 <script>
-  $(function(){
-    $("ul.menu li").click(function(){
-      $("ul.sub:not(:animated)", this).slideToggle();
-    });
+$(document).ready(function () {
+  $(".file").on('change', function(){
+     var fileprop = $(this).prop('files')[0],
+         find_img = $(this).parent().find('img'),
+         filereader = new FileReader(),
+         view_box = $(this).parent('.view_box');
+
+    if(find_img.length){
+       find_img.nextAll().remove();
+       find_img.remove();
+    }
+
+    var img = '<div class="img_view"><img alt="" class="img"><p><a href="#" class="img_del">画像を削除する</a></p></div>';
+
+    view_box.append(img);
+
+    filereader.onload = function() {
+      view_box.find('img').attr({
+        src: filereader.result,
+        width: "150px"
+      });
+      img_del(view_box);
+    }
+    filereader.readAsDataURL(fileprop);
   });
+
+  function img_del(target){
+    target.find("a.img_del").on('click',function(){
+      var self = $(this),
+          parentBox = self.parent().parent().parent();
+      if(window.confirm('画像を削除します。\nよろしいですか？')){
+        setTimeout(function(){
+          parentBox.find('input[type=file]').val('');
+          parentBox.find('.img_view').remove();
+        } , 0);
+      }
+      return false;
+    });
+  }
+
+});
 </script>
-{{--4.モーダルウィンドウ--}}
+{{--4.無限スクロール機能（Ajax）--}}
 <script>
-  $(function () {
-    $('button').on('click', function(){
-    var id =  $(this).data('target');
-    console.log( id );
-    $('#modalArea'+id).fadeIn();
+// 3.1使用する要素名
+var IScontentItems = '.post';
+var IScontent = '.right-content';
+var ISlink = 'a[rel=next]';
+var ISlinkarea = '.pagination';
+var loadingFlag = false;
 
-    jQuery(function($){
-    $(function(){
-    var mySwiper = new Swiper ('.swiper-container', {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 500,
-      centeredSlides : false,
-      pagination: '.swiper-pagination',
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
-      loop: false
-    })
-    })
-    })
+$(window).on('load scroll', function() {
 
-    $('#closeModal , #modalBg').click(function(){
-      $('#modalArea'+id).fadeOut();
-    });
-    });
-  });
+  if(!loadingFlag) {
+      var winHeight = $(window).height();
+      var scrollPos = $(window).scrollTop();
+      var linkPos = $(ISlink).offset().top;
+
+      if(winHeight + scrollPos > linkPos) {
+          loadingFlag = true;
+
+          var nextPage = $(ISlink).attr('href');
+          $(ISlink).remove();
+
+          $.ajax({
+              type: 'GET',
+              url: nextPage,
+              dataType: 'html'
+          }).done(function(data) {
+              var nextLink = $(data).find(ISlink);
+              var contentItems = $(data).find(IScontentItems);
+
+              $(IScontent).append(contentItems);
+
+              if(nextLink.length > 0) {
+                  $(ISlinkarea).append(nextLink);
+                  loadingFlag = false;
+              }
+
+              jQuery(function($){
+              $("button[id=like]").on('click',function(){
+
+                  var id =  $(this).data('postid');
+                  var num =  $(this).data('num');
+                  console.log(id);
+                  console.log(num);
+
+                  $.ajaxSetup({
+                      headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                  });
+                  var $this = $(this);
+                  var data = {'post' : id,
+                              'user' : {{ $user->id }}
+                             };
+                  $.ajax({
+                      url: "../like",
+                      type: 'post',
+                      data : data,
+                  //通信に成功した場合
+                  success : function(json,data) {
+                  $this.children('i').addClass('fas');
+                  $this.closest('button[id=like]').attr('id', 'unlike');
+                  $('.num'+id).text(num+1);
+                  console.log('成功しました');
+                  $("button[id=unlike]").on('click',function(){
+                      var id =  $(this).data('postid');
+                      var num =  $(this).data('num');
+                      console.log(id);
+                      console.log(num);
+
+                      $.ajaxSetup({
+                          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                      });
+                      var $this = $(this);
+
+                      var data = {'post' : id,
+                                  'user' : {{ $user->id }}
+                                 };
+
+                      $.ajax({
+                          url: "../unlike",
+                          type: 'post',
+                          data : data,
+
+                      //通信に成功した場合
+                      success : function(json,data) {
+                      $this.children('i').removeClass('fas');
+                      $this.children('i').addClass('far');
+                      $this.closest('button[id=unlike]').attr('id', 'like');
+                      $('.num'+id).text(num);
+                      console.log('成功しました');
+                      },
+
+                      //失敗した場合
+                      error : function(XMLHttpRequest, textStatus, errorThrown) {
+                      alert("エラーが発生しました：" + textStatus + ":\n" + errorThrown);
+                      }
+                    })
+                  });
+                  },
+                  //失敗した場合
+                  error : function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("エラーが発生しました：" + textStatus + ":\n" + errorThrown);
+                  }
+                })
+              });
+            });
+
+            jQuery(function($){
+            $("button[id=unlike]").on('click',function(){
+                var id =  $(this).data('postid');
+                var num =  $(this).data('num');
+                console.log(id);
+                console.log(num);
+
+                $.ajaxSetup({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                });
+                var $this = $(this);
+
+                var data = {'post' : id,
+                            'user' : {{ $user->id }}
+                           };
+
+                $.ajax({
+                    url: "../unlike",
+                    type: 'post',
+                    data : data,
+
+                //通信に成功した場合
+                success : function(json,data) {
+                $this.children('i').removeClass('fas');
+                $this.children('i').addClass('far');
+                $('.num'+id).text(num-1);
+                console.log('成功しました');
+                },
+                //失敗した場合
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("エラーが発生しました：" + textStatus + ":\n" + errorThrown);
+                }
+              })
+            });
+            });
+
+              jQuery(function($){
+                $("ul.menu li").click(function(){
+                $("ul.sub:not(:animated)", this).slideToggle();
+              });
+              });
+
+              jQuery(function($){
+              $(function(){
+              var mySwiper = new Swiper ('.swiper-container', {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 500,
+                centeredSlides : false,
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                loop: false
+              })
+              })
+              })
+          }).fail(function () {
+              alert('ページの取得に失敗しました。');
+          });
+      }
+    }
+});
 </script>
-{{--5.お気に入り機能--}}
-{{--6.無限スクロール機能--}}
-{{--7.スワイパー機能--}}
+{{--5.お気に入り登録機能--}}
+<script>
+$("button[id=like]").on('click',function(){
+
+    var id =  $(this).data('postid');
+    var num =  $(this).data('num');
+    console.log(id);
+    console.log(num);
+    console.log('likeボタン');
+
+    $.ajaxSetup({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+    var $this = $(this);
+
+    var data = {'post' : id,
+                'user' : {{ $user->id }}
+               };
+
+    $.ajax({
+        url: "../like",
+        type: 'post',
+        data : data,
+
+    //通信に成功した場合
+    success : function(json,data) {
+    $this.children('i').addClass('fas');
+    $this.closest('button[id=like]').attr('id', 'unlike');
+
+    $('.num'+id).text(num+1);
+    console.log('成功しました');
+
+    $("button[id=unlike]").on('click',function(){
+        event.preventDefault();
+
+        var id =  $(this).data('postid');
+        var num =  $(this).data('num');
+        console.log(id);
+        console.log(num);
+        console.log('unlikeボタン');
+
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+        var $this = $(this);
+
+        var data = {'post' : id,
+                    'user' : {{ $user->id }}
+                   };
+
+        $.ajax({
+            url: "../unlike",
+            type: 'post',
+            data : data,
+
+        //通信に成功した場合
+        success : function(json,data) {
+        $this.children('i').removeClass('fas');
+        $('.num'+id).text(num);
+        console.log('成功しました');
+        },
+        //失敗した場合
+        error : function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("エラーが発生しました：" + textStatus + ":\n" + errorThrown);
+        }
+      })
+    });
+    },
+
+    //失敗した場合
+    error : function(XMLHttpRequest, textStatus, errorThrown) {
+    alert("エラーが発生しました：" + textStatus + ":\n" + errorThrown);
+    }
+  })
+});
+</script>
+{{--6.お気に入り解除機能--}}
+<script>
+$("button[id=unlike]").on('click',function(){
+
+    var id =  $(this).data('postid');
+    var num =  $(this).data('num');
+    console.log(id);
+    console.log(num);
+
+    $.ajaxSetup({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+    var $this = $(this);
+
+    var data = {'post' : id,
+                'user' : {{ $user->id }}
+               };
+
+    $.ajax({
+        url: "unlike",
+        type: 'post',
+        data : data,
+
+    //通信に成功した場合
+    success : function(json,data) {
+    $this.children('i').removeClass('fas');
+    $this.children('i').addClass('far');
+    $this.closest('button[id=unlike]').attr('id', 'like');
+    $('.num'+id).text(num-1);
+    console.log('成功しました');
+    },
+
+    //失敗した場合
+    error : function(XMLHttpRequest, textStatus, errorThrown) {
+    alert("エラーが発生しました：" + textStatus + ":\n" + errorThrown);
+    }
+  })
+});
+</script>
+{{--7.swiper機能--}}
 <script>
 $(function(){
 var mySwiper = new Swiper ('.swiper-container', {
@@ -149,6 +444,22 @@ var mySwiper = new Swiper ('.swiper-container', {
 })
 })
 </script>
-
+{{--8.ドロップダウンメニュー--}}
+<script>
+  $(function(){
+    $("ul.menu li").click(function(){
+      $("ul.sub:not(:animated)", this).slideToggle();
+    });
+  });
+</script>
+{{--9.toastrメッセージ機能--}}
+<script>
+  @if (session('flash_message'))
+    $(function () {
+        toastr.options.timeOut = 2000;
+        toastr.success('{{ session('flash_message') }}');
+    });
+  @endif
+</script>
 </body>
 </html>
