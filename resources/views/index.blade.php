@@ -65,7 +65,7 @@
 
         <!-- 右カラム -->
         <div class="right-content">
-          @if($follow_counts == '0')
+          @if(auth()->user() AND $follow_counts == '0')
           <div style="padding:5px 10px; color: #11cd2b;">
             <div style="font-size: 20px;">
               ユーザーをフォローしてみよう！

@@ -409,7 +409,7 @@ $("button[id=unlike]").on('click',function(){
                };
 
     $.ajax({
-        url: "unlike",
+        url: "../unlike",
         type: 'post',
         data : data,
 
