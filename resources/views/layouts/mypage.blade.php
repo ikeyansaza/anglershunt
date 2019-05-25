@@ -295,7 +295,6 @@ $(window).on('load scroll', function() {
                 pagination: '.swiper-pagination',
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
-                loop: false
               })
               })
               })
@@ -432,7 +431,6 @@ var mySwiper = new Swiper ('.swiper-container', {
   pagination: '.swiper-pagination',
   nextButton: '.swiper-button-next',
   prevButton: '.swiper-button-prev',
-  loop: false
 })
 })
 </script>
@@ -472,7 +470,6 @@ $(function () {
     pagination: '.swiper-pagination',
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev',
-    loop: false
   })
   })
   })
