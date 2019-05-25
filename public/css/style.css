@@ -1324,7 +1324,6 @@ img {
   text-align: center;
   margin-top: 10px;
   display: flex;
-  justify-content: space-around;
 }
 .twitter {
   line-height: 30px;

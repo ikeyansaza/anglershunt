@@ -74,7 +74,7 @@
             </div>
             <div class="quest-finish-width2">
               <a href="{{ $order->quest->id }}/{{ $order->id }}/report">
-                <div class="quest-finish item">達成報告</div>
+                <div class="quest-finish item">達成報告</div>　
               </a>
               <form method="post" action="/order/delete/{{$order->id}}">
               @csrf

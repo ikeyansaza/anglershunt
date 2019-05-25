@@ -34,6 +34,7 @@
              <option <?= $level == '30' ? 'selected' : "" ?> value="30">★★★</option>
              <option <?= $level == '40' ? 'selected' : "" ?> value="40">★★★★</option>
              <option <?= $level == '50' ? 'selected' : "" ?> value="50">★★★★★</option>
+             <option <?= $level == '60' ? 'selected' : "" ?> value="60">★★★★★★</option>
             </select>
             <input type="submit" value="▼" style="border:none;">
             </div>
@@ -42,9 +43,23 @@
             <select name="fish" style="cursor:pointer;">
              <option value="">選択する</option>
              <option <?= $fish == 'アジ' ? 'selected' : "" ?> value="アジ">アジ</option>
+             <option <?= $fish == 'アラカブ' ? 'selected' : "" ?> value="アラカブ">アラカブ</option>
              <option <?= $fish == 'イカ' ? 'selected' : "" ?> value="イカ">イカ</option>
+             <option <?= $fish == 'イサキ' ? 'selected' : "" ?> value="イサキ">イサキ</option>
+             <option <?= $fish == '石鯛' ? 'selected' : "" ?> value="石鯛">石鯛</option>
+             <option <?= $fish == 'イワナ' ? 'selected' : "" ?> value="イワナ">イワナ</option>
+             <option <?= $fish == 'うなぎ' ? 'selected' : "" ?> value="うなぎ">うなぎ</option>
+             <option <?= $fish == 'キジハタ' ? 'selected' : "" ?> value="キジハタ">キジハタ</option>
+             <option <?= $fish == 'クエ' ? 'selected' : "" ?> value="クエ">クエ</option>
              <option <?= $fish == 'クロ' ? 'selected' : "" ?> value="クロ">クロ</option>
+             <option <?= $fish == 'サバ' ? 'selected' : "" ?> value="アジ">サバ</option>
              <option <?= $fish == 'シイラ' ? 'selected' : "" ?> value="シイラ">シイラ</option>
+             <option <?= $fish == 'マゴチ' ? 'selected' : "" ?> value="マゴチ">マゴチ</option>
+             <option <?= $fish == '真鯛' ? 'selected' : "" ?> value="真鯛">真鯛</option>
+             <option <?= $fish == 'バス' ? 'selected' : "" ?> value="バス">バス</option>
+             <option <?= $fish == '平政' ? 'selected' : "" ?> value="平政">平政</option>
+             <option <?= $fish == 'ヒラメ' ? 'selected' : "" ?> value="ヒラメ">ヒラメ</option>
+             <option <?= $fish == '雷魚' ? 'selected' : "" ?> value="雷魚">雷魚</option>
             </select>
             <input type="submit" value="▼" style="border:none;">
             </div>
@@ -56,6 +71,8 @@
              <option <?= $field == '河川/渓流' ? 'selected' : "" ?> value="河川/渓流">河川/渓流</option>
              <option <?= $field == '沖磯' ? 'selected' : "" ?> value="沖磯">沖磯</option>
              <option <?= $field == '船' ? 'selected' : "" ?> value="船">船</option>
+             <option <?= $field == '野池/ダム/クリーク/湖' ? 'selected' : "" ?> value="野池/ダム/クリーク/湖">野池/ダム/クリーク/湖</option>
+             <option <?= $field == '自宅' ? 'selected' : "" ?> value="自宅">自宅</option>
             </select>
             <input type="submit" value="▼" style="border:none;">
             </div>
