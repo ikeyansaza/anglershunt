@@ -44,11 +44,10 @@
             </div>
           </div>
           <div class="left-second-post">
-            AnglerdHuntについて/
-            利用規約<br>
-            プライバシーポリシー/
-            お問い合わせ<br>
-            広告掲載について<br>
+            <a href="/description">AnglerdHuntについて</a>/
+            <a href="/policy">利用規約</a><br>
+            <a href="/privacy">プライバシーポリシー</a>/
+            <a href="/contact">お問い合わせ</a><br>
           </div>
         </div>
       </div>
