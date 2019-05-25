@@ -43,15 +43,6 @@
               </a>
             </div>
           </div>
-          <div class="ad-post">
-            <img class="ad" src="images/ad1.png">
-          </div>
-          <div class="ad-post">
-            <img class="ad" src="images/ad2.png">
-          </div>
-          <div class="ad-post">
-            <img class="ad" src="images/ad3.png">
-          </div>
           <div class="left-second-post">
             AnglerdHuntについて/
             利用規約<br>
