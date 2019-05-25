@@ -10,14 +10,6 @@
 
       gtag('config', 'UA-135296207-3');
     </script>
-    <!--Google Adsense-->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: "ca-pub-3225344914379866",
-              enable_page_level_ads: true
-         });
-    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
     <title>AnglersHunt</title>
@@ -461,5 +453,36 @@ var mySwiper = new Swiper ('.swiper-container', {
     });
   @endif
 </script>
+
+<script>
+
+$(function () {
+  $('button').on('click', function(){
+  var id =  $(this).data('target');
+  console.log( id );
+  $('#modalArea'+id).fadeIn();
+
+  jQuery(function($){
+  $(function(){
+  var mySwiper = new Swiper ('.swiper-container', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 500,
+    centeredSlides : false,
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    loop: false
+  })
+  })
+  })
+
+  $('#closeModal , #modalBg').click(function(){
+    $('#modalArea'+id).fadeOut();
+  });
+  });
+  });
+</script>
+
 </body>
 </html>
