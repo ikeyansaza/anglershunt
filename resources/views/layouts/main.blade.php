@@ -35,8 +35,8 @@
     <meta name="twitter:site" content="@ikeyansaza">
     <meta property="og:url" content="https://anglershunt.com">
     <meta property="og:title" content="AnglersHunt | 釣果投稿SNSサイト">
-    <meta property="og:description" content="AnglersHuntは釣り人向けのSNSサイトです。現在β版運営中です。">
-    <meta property="og:image" content="https://anglershunt.com/public/images/_32.jpg" />
+    <meta property="og:description" content="AnglersHuntは釣り好きのためのSNSサイトです。">
+    <meta property="og:image" content="https://anglershunt.com/public/images/_44.jpg" />
   </head>
   <body>
     <header>
