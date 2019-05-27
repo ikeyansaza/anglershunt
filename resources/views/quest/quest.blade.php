@@ -42,13 +42,14 @@
             魚種別:
             <select name="fish" style="cursor:pointer;">
              <option value="">選択する</option>
+             <option <?= $fish == 'アオリイカ' ? 'selected' : "" ?> value="アオリイカ">アオリイカ</option>
              <option <?= $fish == 'アジ' ? 'selected' : "" ?> value="アジ">アジ</option>
              <option <?= $fish == 'アラカブ' ? 'selected' : "" ?> value="アラカブ">アラカブ</option>
-             <option <?= $fish == 'イカ' ? 'selected' : "" ?> value="イカ">イカ</option>
              <option <?= $fish == 'イサキ' ? 'selected' : "" ?> value="イサキ">イサキ</option>
              <option <?= $fish == '石鯛' ? 'selected' : "" ?> value="石鯛">石鯛</option>
              <option <?= $fish == 'イワナ' ? 'selected' : "" ?> value="イワナ">イワナ</option>
              <option <?= $fish == 'うなぎ' ? 'selected' : "" ?> value="うなぎ">うなぎ</option>
+             <option <?= $fish == 'キス' ? 'selected' : "" ?> value="キス">キス</option>
              <option <?= $fish == 'キジハタ' ? 'selected' : "" ?> value="キジハタ">キジハタ</option>
              <option <?= $fish == 'クエ' ? 'selected' : "" ?> value="クエ">クエ</option>
              <option <?= $fish == 'クロ' ? 'selected' : "" ?> value="クロ">クロ</option>
