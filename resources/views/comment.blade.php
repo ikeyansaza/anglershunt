@@ -97,6 +97,10 @@
       <div class="post-third">
         {{ $posts->post }}
       </div>
+      @if($posts->quest_id)
+      <span class="color"><i class="fas fa-crown"></i>{{$posts->quest->name}}</span>
+      @else
+      @endif
       <div class="post-time">
       <?php echo date('Y年n月d日 G時i分', strtotime($posts->updated_at)); ?>
       </div>
