@@ -1,4 +1,4 @@
-@extends('layouts.viewSub')
+@extends('layouts.view_sub')
 
 @section('title', 'AnglersHunt | ヘルプ')
 

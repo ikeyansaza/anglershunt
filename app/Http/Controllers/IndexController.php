@@ -105,7 +105,7 @@ class IndexController extends Controller
       $followers = $user->followers;
       $followings = $user->follows;
 
-      return view('searchUser', compact('user','data','keyword','area','followings','followers'));
+      return view('search_user', compact('user','data','keyword','area','followings','followers'));
     }
 
     public function manage(){

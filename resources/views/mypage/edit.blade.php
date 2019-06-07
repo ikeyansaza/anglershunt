@@ -1,4 +1,4 @@
-@extends('layouts.mypageSub')
+@extends('layouts.mypage_sub')
 
 @section('content')
   <body>
