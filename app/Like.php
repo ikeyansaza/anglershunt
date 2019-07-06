@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+  //コメントテスト
   public function user()
     {
         return $this->belongsTo('App\User');
