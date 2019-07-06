@@ -9,7 +9,6 @@ class Post extends Model
 {
   /**
    * この投稿を所有するUserを取得
-   * これはめちゃめちゃ便利や…
    */
   public function user()
   {
