@@ -7,8 +7,8 @@ use App\Newspost;
 
 class NoticeController extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('admin');
-  }
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 }

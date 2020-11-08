@@ -8,37 +8,38 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function index(){
-          return view('contact.form');
-      }
+    public function index()
+    {
+        return view('contact.form');
+    }
 
-    public function confirm(Request $request){
+    public function confirm(Request $request)
+    {
+        $rules = [
+            'subject' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required'
+        ];
+        $this->validate($request, $rules);
 
-      $rules = [
-          'subject' => 'required|string',
-          'email' => 'required|email',
-          'message' => 'required'
-      ];
-      $this->validate($request, $rules);
+        $contact = $request->all();
 
-          $contact = $request->all();
+        $request->session()->regenerateToken();
 
-          $request->session()->regenerateToken();
+        return view('contact.confirm', $contact);
+    }
 
-          return view('contact.confirm',$contact);
-      }
+    public function sent(Request $request)
+    {
+        $contact = $request->all();
+        if ($request->action === 'back') {
+            return redirect()->route('contact')->withInput($contact);
+        }
 
-    public function sent(Request $request){
+        $request->session()->regenerateToken();
 
-     $contact = $request->all();
-     if($request->action === 'back') {
-         return redirect()->route('contact')->withInput($contact);
-     }
+        Mail::to('abetyan31503@gmail.com')->send(new Contact($contact));
 
-     $request->session()->regenerateToken();
-
-     Mail::to('abetyan31503@gmail.com')->send(new Contact($contact));
-
-     return view('contact.thanks');
+        return view('contact.thanks');
     }
 }

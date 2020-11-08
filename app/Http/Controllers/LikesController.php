@@ -18,25 +18,25 @@ class LikesController extends Controller
 
     public function store(Request $request)
     {
-      // Postモデルのインスタンスを作成する
-      $like = new Like();
-      //それぞれのカラムに値を登録する
-      $like->user_id = $request->user;
-      //投稿
-      $like->post_id = $request->post;
-      // インスタンスの状態をデータベースに書き込む
-      $like->save();
+        // Postモデルのインスタンスを作成する
+        $like = new Like();
+        //それぞれのカラムに値を登録する
+        $like->user_id = $request->user;
+        //投稿
+        $like->post_id = $request->post;
+        // インスタンスの状態をデータベースに書き込む
+        $like->save();
 
-      //「投稿する」をクリックしたら投稿情報表示ページへリダイレクト
-      return back();
+        //「投稿する」をクリックしたら投稿情報表示ページへリダイレクト
+        return back();
     }
 
     public function destroy(Request $request)
     {
-      $delete = like::where('user_id',$request->user)
-                    ->Where('post_id',$request->post)
+        $delete = like::where('user_id', $request->user)
+                    ->Where('post_id', $request->post)
                     ->delete();
 
-      return redirect('index.php');
+        return redirect('index.php');
     }
 }
